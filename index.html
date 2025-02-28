@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>styx-labyrinth</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<div class="container">
-        <h1 class="glitch">STYX LABYRINTH</h1>
-        <p class="hint">"Cinco moedas selam o destino do viajante."</p>
-        
-        <p id="question"></p> <!-- Aqui será exibida a pergunta do enigma --><html lang="pt">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,10 +9,10 @@
 <body>
     <div class="container">
         <h1 class="glitch">STYX LABYRINTH</h1>
-        
+        <p class="hint">"Cinco moedas selam o destino do viajante."</p>
+
         <!-- PRIMEIRO DESAFIO -->
         <div id="first-challenge">
-            <p class="hint">"Cinco moedas selam o destino do viajante."</p>
             <input type="text" id="first-answer" placeholder="Digite a resposta..." autocomplete="off">
             <button onclick="checkFirstAnswer()">Confirmar</button>
             <p id="first-message"></p>
@@ -48,136 +34,7 @@
         </div>
     </div>
 
-    <script>
-        // Perguntas extremamente difíceis para desafiar a polícia
-        const puzzles = [
-            { 
-                question: "Meu nome foi dado pela estrela que me guiou. Mas fui traído pelo brilho de 30 moedas. Quem sou eu?", 
-                answer: ["judas", "judas iscariotes"]
-            },
-            { 
-                question: "Existe um número que, quando somado aos seus próprios dígitos ao quadrado, retorna a si mesmo. Qual é ele?", 
-                answer: ["6174"] 
-            },
-            { 
-                question: "Sou o número que define as espirais da natureza, as galáxias e até o seu próprio corpo. Qual sequência represento?", 
-                answer: ["fibonacci"] 
-            },
-            { 
-                question: "Meu nome foi inspirado em um termo grego que significa ‘indivisível’, mas fui provado errado com o tempo. O que sou?", 
-                answer: ["átomo", "atomo"] 
-            },
-            { 
-                question: "Quanto mais me tiram, maior eu fico. O que sou?", 
-                answer: ["buraco", "um buraco"]
-            },
-            { 
-                question: "O tempo destruiu a minha identidade. O meu barco ainda é o mesmo depois de substituir todas as minhas partes?", 
-                answer: ["paradoxo de teseu", "teseu"]
-            },
-            { 
-                question: "Eu ando sem pés e falo sem boca. Conto a verdade, mas nem sempre sou confiável. O que sou?", 
-                answer: ["relógio", "tempo"] 
-            },
-            { 
-                question: "A chave para me entender é uma cifra famosa. Meu nome foi um mistério durante uma guerra. Quem sou eu?", 
-                answer: ["enigma", "máquina enigma"]
-            }
-        ];
-
-        let currentPuzzles = [];
-        let currentIndex = 0;
-
-        function checkFirstAnswer() {
-            const userAnswer = document.getElementById("first-answer").value.trim().toLowerCase();
-            const messageElement = document.getElementById("first-message");
-
-            if (userAnswer === "caronte") {
-                // Transição para os puzzles
-                document.getElementById("first-challenge").style.display = "none"; 
-                document.getElementById("puzzle-section").style.display = "block"; 
-                startGame();
-            } else {
-                messageElement.textContent = "Resposta incorreta! Recomeçando...";
-                messageElement.style.color = "#ff0000";
-                setTimeout(() => location.reload(), 2000);
-            }
-        }
-
-        function startGame() {
-            currentPuzzles = puzzles.sort(() => Math.random() - 0.5);
-            currentIndex = 0;
-            showPuzzle();
-        }
-
-        function showPuzzle() {
-            if (currentIndex < currentPuzzles.length) {
-                document.getElementById("question").textContent = currentPuzzles[currentIndex].question;
-                document.getElementById("answer").value = "";
-            } else {
-                // Exibe a tela de finalização
-                document.getElementById("message").textContent = "Você venceu todos os desafios de lógica! Obrigado por jogar!";
-                document.getElementById("puzzle-section").style.display = "none";
-                document.getElementById("final-screen").style.display = "block";  // Mostrar tela final
-            }
-        }
-
-        function checkAnswer() {
-            const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
-            const correctAnswers = currentPuzzles[currentIndex].answer;
-            const messageElement = document.getElementById("message");
-
-            if (correctAnswers.includes(userAnswer)) {
-                currentIndex++;
-                if (currentIndex < currentPuzzles.length) {
-                    messageElement.textContent = "Correto! Próximo enigma...";
-                    messageElement.style.color = "#00ff00";
-                    setTimeout(showPuzzle, 1000);
-                } else {
-                    messageElement.textContent = "Você venceu! A travessia foi concluída!";
-                    messageElement.style.color = "#00ff00";
-                    setTimeout(() => {
-                        document.getElementById("puzzle-section").style.display = "none";
-                        document.getElementById("final-screen").style.display = "block"; // Exibe a tela de finalização
-                    }, 1000);
-                }
-            } else {
-                messageElement.textContent = "Resposta incorreta! Tente novamente.";
-                messageElement.style.color = "#ff0000";
-            }
-        }
-    </script>
-    
-    <style>
-        #final-screen {
-            text-align: center;
-            padding: 50px;
-            background-color: #1e1e1e;
-            color: #c5a880;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        #final-screen h1 {
-            font-size: 3rem;
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 20px;
-            color: #00ff00;
-        }
-
-        #final-screen p {
-            font-size: 1.5rem;
-            font-family: 'IM Fell English', serif;
-            opacity: 0.8;
-            margin-bottom: 30px;
-        }
-    </style>
+    <script src="script.js"></script>
 </body>
 </html>
-<!-- partial -->
-  <script  src="./script.js"></script>
 
-</body>
-</html>
